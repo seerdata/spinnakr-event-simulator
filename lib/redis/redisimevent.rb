@@ -14,6 +14,14 @@ class RedisimEvent
     @primarykey = 'primary-key'
   end
 
+  def get_project
+    ['1','2','3'].sample
+  end
+
+  def get_dimension
+    'job-skills'
+  end
+
   def get_key
     ['ios','android','java','python','ruby'].sample
   end
@@ -24,12 +32,22 @@ class RedisimEvent
     # this works because nil.to_i = 0
     value = backvalue.to_i + 1
     @redisc.set @primarykey, value
-    value
+    value.to_s
+  end
+
+  def build_hash_key
+    project = get_project
+    dimension = get_dimension
+    key = get_key
+    primarykey = get_primary_key
+    project + ':' + dimension + ':' + key + ':' + primarykey
   end
 
   def run
+    @redisc.select @db_account
     for i in 1..10
-      puts get_primary_key
+      key = build_hash_key
+      @redisc.hset key, 'account_id', @db_account.to_s
     end
   end
 
