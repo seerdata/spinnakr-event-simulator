@@ -45,7 +45,7 @@ class RedisimEvent
     # Build the hash key
     #
     keyhash = project + ':' + dimension + ':' + key + ':' + primarykey
-    @redisc.hset keyhash, 'account_id', @db_account.to_s
+    @redisc.hset keyhash, 'created_at', Time.now
     #
     # Build the set key
     #
