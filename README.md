@@ -1,4 +1,7 @@
 
+**Now that we are up and running with a live storm instance this code
+will probably no longer be needed. However, the event spec link below
+is still very much in use.**
 
 This code only serves as a test for Justin's actual code.  This enables
 me to test the endpoints and show that the proper data is being sent
